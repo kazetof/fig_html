@@ -2,4 +2,4 @@ __pycache__/
 outputs/
 tests/outputs
 Pipfile.lock
-fightml.egg-info/
+fig_html.egg-info/

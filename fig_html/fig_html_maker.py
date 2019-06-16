@@ -4,15 +4,15 @@ import shutil
 from jinja2 import PackageLoader
 from jinja2 import Environment
 
-import fightml
-from fightml.utils.path import _RelativePathManager
+import fig_html
+from fig_html.utils.path import _RelativePathManager
 
 
 class HTMLMaker(object):
     """
     Example
     -------
-    >>> from fightml import HTMLMaker
+    >>> from fig_html import HTMLMaker
     >>> root_dir = "./tests/outputs"
     >>> HTMLMaker().make(root_dir)
     """
@@ -52,7 +52,7 @@ class HTMLMaker(object):
         os.makedirs(destination_path, exist_ok=True)
 
         # only basestyle.css so far
-        source_css_path = os.path.join(fightml.__path__[0], "templates/basestyle.css")
+        source_css_path = os.path.join(fig_html.__path__[0], "templates/basestyle.css")
         shutil.copyfile(source_css_path, os.path.join(destination_path, "basestyle.css"))
 
 
@@ -65,7 +65,7 @@ class _HTMLRenderer(object):
         assert template_name in ("base")
 
         template_basename = template_name + ".html"
-        pl = PackageLoader('fightml', 'templates')
+        pl = PackageLoader('fig_html', 'templates')
         jinja2_env = Environment(loader=pl)
 
         globals_vals = {}

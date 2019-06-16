@@ -1,0 +1,16 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+ipython = "==7.3.0"
+c
+[packages]
+numpy = "==1.16.2"
+pandas = "==0.24.2"
+matplotlib = "==3.0.3"
+jinja2 = "==2.10.1"
+
+[requires]
+python_version = "3.7.2"

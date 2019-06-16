@@ -13,7 +13,7 @@ class HTMLMaker(object):
     Example
     -------
     >>> from fightml import HTMLMaker
-    >>> root_dir = "./outputs"
+    >>> root_dir = "./tests/outputs"
     >>> HTMLMaker().make(root_dir)
     """
     def __init__(self):

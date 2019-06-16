@@ -15,15 +15,15 @@ class _RelativePathManager(object):
 
     def get_fignames(self, fig_path: str) -> list:
         """
-        >>> root_dir = "./outputs"
-        >>> fig_path = "./outputs/scatter"
+        >>> root_dir = "./tests/outputs"
+        >>> fig_path = "./tests/outputs/correlation"
         >>> _RelativePathManager(root_dir).get_fignames(fig_path)
-        ['./fig3.png']
+        ['./fig1.png', './fig2.png', './fig3.png']
         """
         p = Path(fig_path)
         fignames = list(p.glob("*.png"))
         fignames_str = [ "./" + str(figname.relative_to(fig_path)) for figname in fignames]
-
+        fignames_str = sorted(fignames_str)
         if self._VERBOSE:
             print("--- get_fignames ---")
             print(f"fig_path : {fig_path},\nfignames_str : {fignames_str}")
@@ -32,8 +32,8 @@ class _RelativePathManager(object):
 
     def get_css_path(self, fig_path: str) -> str:
         """
-        >>> root_dir = "./outputs"
-        >>> fig_path = "./outputs/scatter"
+        >>> root_dir = "./tests/outputs"
+        >>> fig_path = "./tests/outputs/scatter"
         >>> _RelativePathManager(root_dir).get_css_path(fig_path)
         '../_static/basestyle.css'
         """
@@ -51,9 +51,9 @@ class _RelativePathManager(object):
         fig_path : str
             i.e. fig_path = "./outputs"
 
-        >>> root_dir = "./outputs"
+        >>> root_dir = "./tests/outputs"
         >>> _RelativePathManager(root_dir).get_lower_dir_htmls(root_dir)
-        ['./scatter/scatter.html']
+        ['./correlation/correlation.html', './histogram/histogram.html']
         """
         p = Path(fig_path)
         html_paths = list(p.glob("*/*.html"))
@@ -67,10 +67,10 @@ class _RelativePathManager(object):
 
     def get_parent_dir_html(self, fig_path: str) -> str:
         """
-        >>> root_dir = "./outputs"
-        >>> fig_path = "./outputs/scatter"
+        >>> root_dir = "./tests/outputs"
+        >>> fig_path = "./tests/outputs/scatter"
         >>> _RelativePathManager(root_dir).get_parent_dir_html(fig_path)
-        './outputs/test.html'
+        '../../../tests/outputs/outputs.html'
         """
         p = Path(fig_path)
 
@@ -85,11 +85,8 @@ class _RelativePathManager(object):
         assert len(parent_htmls) == 1, f"too many html file in {str(p.parent)} : {parent_htmls}"
         parent_html = parent_htmls[0]
 
-        if self.root_dir == fig_path:
+        for _ in range(len(Path(fig_path).parts)): # back to ./
             parent_html = os.path.join("../", str(parent_html))
-        else:
-            for _ in range(len(Path(fig_path).parts)): # back to ./
-                parent_html = os.path.join("../", str(parent_html))
 
         if self._VERBOSE:
             print("--- get_parent_dir_html ---")
@@ -101,7 +98,7 @@ class _RelativePathManager(object):
         """
         >>> root_dir = "./outputs"
         >>> _RelativePathManager(root_dir).get_child_dir_path(root_dir)
-        ['./outputs/scatter']
+        ['./outputs/correlation', './outputs/histogram']
         """
         p = Path(fig_path)
         child_paths = [elem for elem in list(p.glob("*")) if elem.is_dir()]
@@ -125,8 +122,8 @@ class _RelativePathManager(object):
 
     def get_dirnames_from_htmls(self, html_paths: list) -> list:
         """
-        >>> root_dir = "./outputs"
-        >>> _RelativePathManager(root_dir).get_dirnames_from_htmls(["./outputs/test.html"])
+        >>> root_dir = "./tests/outputs"
+        >>> _RelativePathManager(root_dir).get_dirnames_from_htmls(["./tests/outputs/test.html"])
         ['outputs']
         """
         dirnames = [ os.path.basename(os.path.dirname(html_path)) for html_path in html_paths ]

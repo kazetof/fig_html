@@ -10,7 +10,7 @@ class SampleFiguresMaker(object):
     Example
     -------
     >>> from fightml.utils import SampleFiguresMaker
-    >>> root_dir = "./outputs"
+    >>> root_dir = "./tests/outputs"
     >>> SampleFiguresMaker().make(root_dir)
     """
     def make(self, outputs_path: str) -> None:

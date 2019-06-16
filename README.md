@@ -15,8 +15,13 @@ jinja2 >= 2.10
 ```
 The matplotlib is only for making sample figures.
 
-# Usage
+# Installation
 
+```
+pip install fig-html
+```
+
+# Usage
 Suppose we saved figures in a directory hierarchicaly.
 
 `SampleFiguresMaker` makes sample figures and directory.

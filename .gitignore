@@ -3,3 +3,5 @@ outputs/
 tests/outputs
 Pipfile.lock
 fig_html.egg-info/
+dist/
+build/
